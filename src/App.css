@@ -3,4 +3,50 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.3)
+    ),
+    url("https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2")
+      center/cover no-repeat fixed;
+}
+
+form {
+  background-color: #fff;
+  padding: 20px 60px;
+  width: 300px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #e8928e;
+  font-weight: 700;
+}
+
+button {
+  margin-top: 16px;
+  padding: 10px 36px;
+  cursor: pointer;
+  background-color: #ffe5e0;
+  border: rgba(0, 0, 0, 0);
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+}
+button:hover {
+  background-color: #ffc9c4;
+}
+
+.disabled {
+  background-color: rgba(232, 124, 142, 0.3);
+  cursor: not-allowed;
 }

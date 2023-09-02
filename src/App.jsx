@@ -1,10 +1,14 @@
 import { useState } from "react";
 import "./App.css";
 
+import { validateValues } from "./utils/validateValues";
 import FormInput from "./components/FormInput";
 import { inputs } from "./data";
 
 const App = () => {
+  // flag to prevent submission click if values not valid
+  const [isFormValid, setIsFormValid] = useState(false);
+
   const [values, setValues] = useState({
     username: "",
     email: "",
@@ -13,13 +17,25 @@ const App = () => {
     confirmPassword: "",
   });
 
+  /**
+   * handles input changes
+   */
   const handleChange = (e) => {
-    console.log(e);
     setValues({ ...values, [e.target.name]: e.target.value });
+    setIsFormValid(validateValues(values));
+    console.log(validateValues(values));
   };
 
+  /**
+   * handles form submission
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // check values are valid if not stop submission
+    if (!validateValues(values)) return;
+
+    console.log("Form Successfully submitted");
 
     //Grab form values without rendering component
     /*
@@ -29,11 +45,10 @@ const App = () => {
     */
   };
 
-  console.log(values);
-
   return (
     <div className="app">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} noValidate>
+        <h1>Register</h1>
         {inputs.map((input) => (
           <FormInput
             key={input.id}
@@ -43,9 +58,14 @@ const App = () => {
             type={input.type}
             value={values[input.name]}
             onValueChange={handleChange}
+            errorMessage={input.errorMessage}
+            inputRequired={input.required}
+            pattern={input.pattern}
           />
         ))}
-        <button>Submit</button>
+        <button type="submit" className={!isFormValid ? "disabled" : ""}>
+          Submit
+        </button>
       </form>
     </div>
   );
